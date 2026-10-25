@@ -183,6 +183,9 @@ The frontend tests cover the pure helpers (query string building, price range ch
 
 ## Screenshots
 
+API testing screenshots are attached in the [API_testing_screenshots](API_testing_screenshots/) folder.
+
+
 | | |
 | --- | --- |
 | ![Login](docs/screenshots/01-login.png) | ![Purchase dialog](docs/screenshots/04-purchase.png) |
