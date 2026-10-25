@@ -1,6 +1,13 @@
-# AI chat logs
+# AI Usage & Prompts
 
-This project was built with Claude (Anthropic) in the Claude app.
+I used Claude (Anthropic) as an AI assistant during this project.
+
+## How I used AI
+   - Scaffolding tests and API endpoints
+   - Debugging deployment (Vercel config, missing Postgres driver)
+   - Reviewing and refactoring code
+
+All code was reviewed, tested and committed by me.
 
 ## Public chat link
 https://claude.ai/share/301bdc9e-282d-4234-948a-bbf37c49e4b7
