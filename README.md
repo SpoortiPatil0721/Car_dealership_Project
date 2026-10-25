@@ -221,6 +221,17 @@ The whole app runs on Vercel's free plan. The React build is served as a static 
 
 The raw chat is linked in [PROMPTS.md](PROMPTS.md).
 
+## References
+
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [SQLAlchemy](https://docs.sqlalchemy.org/)
+- [Vite](https://vite.dev/)
+- [Vercel – Python runtime](https://vercel.com/docs/functions/runtimes/python)
+- [Vercel – vercel.json configuration](https://vercel.com/docs/project-configuration)
+- [Neon – Connect from any app](https://neon.tech/docs/connect/connect-from-any-app)
+- [psycopg 3](https://www.psycopg.org/psycopg3/docs/)
+
+  
 ### Reflection
 
 The main job was of this project was creating application, reviewing it, running it, and making sure I understand every decision well enough to explain and change it. Working test first with an AI was useful because the tests made it obvious when generated code was wrong, and they gave me something concrete to read before the implementation. The biggest time saver was boilerplate (schemas, routers, forms). The parts I had to think hardest about were the rules: who is allowed to do what, what happens to history when a car is deleted, and how to stop stock going negative.
