@@ -4,7 +4,7 @@ LotLine is a full stack app for running the inventory of a small car dealership.
 
 I built it for the TDD kata, so the backend was written test first and the commit history follows red, green, refactor.
 
-Live demo: _add your link here after deploying (see [DEPLOY.md](DEPLOY.md))_
+Live demo: https://car-dealership-project-9uz4.vercel.app/ (see [DEPLOY.md](DEPLOY.md))_
 
 ![The lot](docs/screenshots/02-lot.png)
 
