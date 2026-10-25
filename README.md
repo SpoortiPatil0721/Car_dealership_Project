@@ -1,10 +1,10 @@
 # LotLine: Car Dealership Inventory System
 
-LotLine is a full stack app for running the inventory of a small car dealership. Buyers sign up, browse what's on the lot, filter it down and buy a car. Admins add new arrivals, fix details, restock and remove cars, and get a quick picture of stock and sales.
+LotLine is a full-stack app for running the inventory of a small car dealership. Buyers sign up, browse what's on the lot, filter it down and buy a car. Admins add new arrivals, fix details, restock and remove cars, and get a quick picture of stock and sales.
 
-I built it for the TDD kata, so the backend was written test first and the commit history follows red, green, refactor.
+I built it for the TDD kata, so the backend was written test-first and the commit history follows red, green, refactor.
 
-Live demo: https://car-dealership-project-9uz4.vercel.app/ (see [DEPLOY.md](DEPLOY.md))_
+Live demo: https://car-dealership-project-9uz4.vercel.app/ (see [DEPLOY.md](DEPLOY.md))
 
 ![The lot](docs/screenshots/02-lot.png)
 
@@ -12,8 +12,8 @@ Live demo: https://car-dealership-project-9uz4.vercel.app/ (see [DEPLOY.md](DEPL
 
 Required by the kata:
 
-- Register and log in with JWT based auth
-- Browse every car on the lot, including sold out ones
+- Register and log in with JWT-based auth
+- Browse every car on the lot, including sold-out ones
 - Search by make, model, body style and price range
 - Purchase button on each car, disabled when stock hits zero
 - Admins can add, edit and delete cars and restock them
@@ -22,8 +22,8 @@ Required by the kata:
 Things I added on top:
 
 1. **Purchase history.** Every sale is saved with the price paid at that moment. Buyers get a "My purchases" page, admins get a full sales log with the buyer's email. History stays correct even if the car is later edited or deleted.
-2. **Insights page for admins.** Stock value, revenue, units sold, a "restock soon" list, best sellers and a units per body style chart, all worked out with SQL aggregates.
-3. **Better buying and browsing.** You can buy more than one unit with a live total, sort the lot five ways, hide sold out cars, and cars with one or two left are flagged.
+2. **Insights page for admins.** Stock value, revenue, units sold, a "restock soon" list, best sellers and a units-per-body-style chart, all worked out with SQL aggregates.
+3. **Better buying and browsing.** You can buy more than one unit with a live total, sort the lot five ways, hide sold-out cars, and cars with one or two left are flagged.
 4. **Stock can't go negative under load.** The stock check happens inside the SQL `UPDATE`, so two people clicking buy on the last car at the same time can't both get it.
 5. **Demo data.** One command (or one env var on the server) fills the lot with a dozen cars and two demo accounts.
 
@@ -32,7 +32,7 @@ Things I added on top:
 | Part | Choice |
 | --- | --- |
 | Backend | Python 3.12, FastAPI, SQLAlchemy 2 |
-| Database | SQLite for local dev and tests, PostgreSQL in production |
+| Database | SQLite for local dev and tests, PostgreSQL (psycopg 3) in production |
 | Auth | JWT (PyJWT), passwords hashed with PBKDF2-SHA256 |
 | Backend tests | pytest, pytest-cov, FastAPI TestClient |
 | Frontend | React 19, Vite, Tailwind CSS 4, plain HTML5/CSS3 |
@@ -70,7 +70,7 @@ docs/
   test-report.txt
 ```
 
-Routers only deal with HTTP. Services hold the rules and don't import FastAPI at all, they raise plain errors like `NotFoundError` or `OutOfStockError` and one handler turns those into status codes. Each service gets its session handed in, which keeps them easy to test and swap.
+Routers only deal with HTTP. Services hold the rules and don't import FastAPI at all. They raise plain errors like `NotFoundError` or `OutOfStockError`, and one handler turns those into status codes. Each service gets its session handed in, which keeps them easy to test and swap.
 
 ## Running it locally
 
@@ -150,7 +150,7 @@ All vehicle and purchase routes need an `Authorization: Bearer <token>` header.
 
 Errors always come back as `{"detail": "..."}`. Status codes: 401 not logged in, 403 not an admin, 404 not found, 409 duplicate email or not enough stock, 422 bad input, 400 for an impossible price range.
 
-One choice worth calling out: the kata only marks delete and restock as admin only. I made add and update admin only too, because a dealership where any customer can change prices or add cars didn't make sense. It's a one line change in `routers/vehicles.py` if that's not wanted.
+One choice worth calling out: the kata only marks delete and restock as admin only. I made add and update admin only too, because a dealership where any customer can change prices or add cars didn't make sense. It's a one-line change in `routers/vehicles.py` if that's not wanted.
 
 ## Tests
 
@@ -183,8 +183,7 @@ The frontend tests cover the pure helpers (query string building, price range ch
 
 ## Screenshots
 
-API testing screenshots are attached in the [API_testing_screenshots](API_testing_screenshots/) folder.
-
+API testing screenshots are in the [API_testing_screenshots](API_testing_screenshots/) folder.
 
 | | |
 | --- | --- |
@@ -203,7 +202,7 @@ The look is based on an actual car lot: asphalt grey, yellow painted bay lines b
 
 ## Hosting
 
-The whole app runs on Vercel's free plan. The React build is served as a static site and the FastAPI app runs as a Python function from `api/index.py`, so both live on one address and there's no CORS to configure. The database is a free Neon PostgreSQL instance. Every push to `main` redeploys. Step by step instructions are in [DEPLOY.md](DEPLOY.md).
+The whole app runs on Vercel's free plan. The React build is served as a static site and the FastAPI app runs as a Python function from `api/index.py`, so both live on one address and there's no CORS to configure. The database is a free Neon PostgreSQL instance. Every push to `main` redeploys. Step-by-step instructions are in [DEPLOY.md](DEPLOY.md).
 
 ## My AI Usage
 
@@ -213,12 +212,18 @@ The whole app runs on Vercel's free plan. The React build is served as a static 
 
 ### How I used it
 
-- I gave Claude the kata brief and had it work through the backend test first: it wrote the failing tests for each area, then the code to pass them, then the refactors. The commit history shows that order.
+- I gave Claude the kata brief and had it work through the backend test-first: it wrote the failing tests for each area, then the code to pass them, then the refactors. The commit history shows that order.
 - It proposed the overall structure (app factory, services separated from routers, domain errors) and I kept it because it made testing easy.
 - It wrote most of the React frontend, the Tailwind theme and the SVG car drawings, and ran the app in a headless browser to take the screenshots.
 - It flagged a race condition in the first version of purchase (read stock, check, write) and changed it to an atomic `UPDATE ... WHERE quantity >= n`.
 - It set up the GitHub Actions test workflow and the Vercel deployment config.
+- It helped me debug the live deployment on Vercel and Neon (a `vercel.json` setting overriding the dashboard, and a missing PostgreSQL driver in `requirements.txt`).
 
+Commits made with AI help carry a `Co-authored-by` trailer for Claude, except a few small deployment fixes I committed through the GitHub web editor. The raw chat is linked in [PROMPTS.md](PROMPTS.md).
+
+### Reflection
+
+The main job of this project was creating the application, reviewing it, running it, and making sure I understand every decision well enough to explain and change it. Working test-first with an AI was useful because the tests made it obvious when generated code was wrong, and they gave me something concrete to read before the implementation. The biggest time saver was boilerplate (schemas, routers, forms). The parts I had to think hardest about were the rules: who is allowed to do what, what happens to history when a car is deleted, and how to stop stock going negative.
 
 ## References
 
@@ -229,11 +234,3 @@ The whole app runs on Vercel's free plan. The React build is served as a static 
 - [Vercel – vercel.json configuration](https://vercel.com/docs/project-configuration)
 - [Neon – Connect from any app](https://neon.tech/docs/connect/connect-from-any-app)
 - [psycopg 3](https://www.psycopg.org/psycopg3/docs/)
-
-## AI Usage
-
-Every commit that used AI has a `Co-authored-by` trailer for Claude. The raw chat is linked in [PROMPTS.md](PROMPTS.md).
-  
-### Reflection
-
-The main job was of this project was creating application, reviewing it, running it, and making sure I understand every decision well enough to explain and change it. Working test first with an AI was useful because the tests made it obvious when generated code was wrong, and they gave me something concrete to read before the implementation. The biggest time saver was boilerplate (schemas, routers, forms). The parts I had to think hardest about were the rules: who is allowed to do what, what happens to history when a car is deleted, and how to stop stock going negative.
