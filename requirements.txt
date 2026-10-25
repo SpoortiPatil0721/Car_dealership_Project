@@ -1,0 +1,5 @@
+# vercel installs these for the api/ function, local dev uses backend/requirements.txt
+fastapi>=0.115
+sqlalchemy>=2.0
+pyjwt>=2.8
+psycopg2-binary>=2.9

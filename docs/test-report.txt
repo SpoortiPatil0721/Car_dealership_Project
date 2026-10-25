@@ -1,0 +1,141 @@
+Backend test report (pytest + coverage)
+Command: cd backend && pytest -v --cov=app
+
+============================= test session starts ==============================
+platform linux -- Python 3.13.17, pytest-9.1.1, pluggy-1.6.0
+rootdir: backend
+configfile: pytest.ini
+testpaths: tests
+collecting ... collected 101 items
+
+tests/test_auth.py::test_register_returns_token_and_user PASSED          [  0%]
+tests/test_auth.py::test_register_twice_with_same_email_is_conflict PASSED [  1%]
+tests/test_auth.py::test_register_rejects_short_password PASSED          [  2%]
+tests/test_auth.py::test_register_rejects_bad_email PASSED               [  3%]
+tests/test_auth.py::test_email_in_admin_list_becomes_admin PASSED        [  4%]
+tests/test_auth.py::test_login_with_correct_credentials PASSED           [  5%]
+tests/test_auth.py::test_login_with_wrong_password_is_unauthorized PASSED [  6%]
+tests/test_auth.py::test_login_with_unknown_email_is_unauthorized PASSED [  7%]
+tests/test_auth.py::test_me_requires_a_token PASSED                      [  8%]
+tests/test_auth.py::test_me_rejects_a_bad_token PASSED                   [  9%]
+tests/test_auth.py::test_me_returns_current_user PASSED                  [ 10%]
+tests/test_config_and_edges.py::test_settings_read_from_environment PASSED [ 11%]
+tests/test_config_and_edges.py::test_settings_defaults_when_env_is_empty PASSED [ 12%]
+tests/test_config_and_edges.py::test_health_check_is_public PASSED       [ 13%]
+tests/test_config_and_edges.py::test_hash_with_unknown_algorithm_is_rejected PASSED [ 14%]
+tests/test_config_and_edges.py::test_token_for_deleted_user_is_rejected PASSED [ 15%]
+tests/test_config_and_edges.py::test_update_cannot_null_a_required_field PASSED [ 16%]
+tests/test_config_and_edges.py::test_update_can_clear_an_optional_field PASSED [ 17%]
+tests/test_inventory.py::test_purchase_needs_login PASSED                [ 18%]
+tests/test_inventory.py::test_purchase_takes_one_off_the_stock_by_default PASSED [ 19%]
+tests/test_inventory.py::test_purchase_several_at_once PASSED            [ 20%]
+tests/test_inventory.py::test_can_buy_the_last_one PASSED                [ 21%]
+tests/test_inventory.py::test_purchase_when_sold_out_is_conflict PASSED  [ 22%]
+tests/test_inventory.py::test_buying_more_than_available_changes_nothing PASSED [ 23%]
+tests/test_inventory.py::test_purchase_quantity_must_be_positive PASSED  [ 24%]
+tests/test_inventory.py::test_purchase_missing_vehicle_is_404 PASSED     [ 25%]
+tests/test_inventory.py::test_admin_can_restock PASSED                   [ 26%]
+tests/test_inventory.py::test_regular_user_cannot_restock PASSED         [ 27%]
+tests/test_inventory.py::test_restock_needs_positive_quantity PASSED     [ 28%]
+tests/test_inventory.py::test_restock_missing_vehicle_is_404 PASSED      [ 29%]
+tests/test_inventory.py::test_sold_out_vehicle_can_be_bought_again_after_restock PASSED [ 30%]
+tests/test_purchases.py::test_history_needs_login PASSED                 [ 31%]
+tests/test_purchases.py::test_history_starts_empty PASSED                [ 32%]
+tests/test_purchases.py::test_purchase_shows_up_in_history_with_price_snapshot PASSED [ 33%]
+tests/test_purchases.py::test_failed_purchase_is_not_recorded PASSED     [ 34%]
+tests/test_purchases.py::test_later_price_change_does_not_rewrite_history PASSED [ 35%]
+tests/test_purchases.py::test_users_only_see_their_own_purchases PASSED  [ 36%]
+tests/test_purchases.py::test_newest_purchase_comes_first PASSED         [ 37%]
+tests/test_purchases.py::test_history_survives_vehicle_being_deleted PASSED [ 38%]
+tests/test_purchases.py::test_admin_sees_all_sales_with_buyer PASSED     [ 39%]
+tests/test_purchases.py::test_regular_user_cannot_see_all_sales PASSED   [ 40%]
+tests/test_search.py::test_search_needs_login PASSED                     [ 41%]
+tests/test_search.py::test_no_filters_returns_everything PASSED          [ 42%]
+tests/test_search.py::test_search_by_make_ignores_case PASSED            [ 43%]
+tests/test_search.py::test_search_by_partial_model PASSED                [ 44%]
+tests/test_search.py::test_search_by_category PASSED                     [ 45%]
+tests/test_search.py::test_category_match_is_exact_not_partial PASSED    [ 46%]
+tests/test_search.py::test_search_by_price_range_is_inclusive PASSED     [ 47%]
+tests/test_search.py::test_only_min_price PASSED                         [ 48%]
+tests/test_search.py::test_only_max_price PASSED                         [ 49%]
+tests/test_search.py::test_filters_combine PASSED                        [ 50%]
+tests/test_search.py::test_free_text_query_looks_at_make_model_and_category PASSED [ 51%]
+tests/test_search.py::test_in_stock_only_hides_sold_out PASSED           [ 52%]
+tests/test_search.py::test_min_price_above_max_price_is_bad_request PASSED [ 53%]
+tests/test_search.py::test_negative_price_filter_is_rejected PASSED      [ 54%]
+tests/test_search.py::test_sorting[price_asc-City] PASSED                [ 55%]
+tests/test_search.py::test_sorting[price_desc-Model 3] PASSED            [ 56%]
+tests/test_search.py::test_sorting[stock_desc-Thar] PASSED               [ 57%]
+tests/test_search.py::test_unknown_sort_is_rejected PASSED               [ 58%]
+tests/test_search.py::test_categories_endpoint_lists_distinct_categories PASSED [ 59%]
+tests/test_security.py::test_hashed_password_verifies PASSED             [ 60%]
+tests/test_security.py::test_wrong_password_does_not_verify PASSED       [ 61%]
+tests/test_security.py::test_same_password_gets_different_salt PASSED    [ 62%]
+tests/test_security.py::test_garbage_hash_never_verifies PASSED          [ 63%]
+tests/test_security.py::test_token_round_trip PASSED                     [ 64%]
+tests/test_security.py::test_expired_token_is_rejected PASSED            [ 65%]
+tests/test_security.py::test_token_signed_with_other_secret_is_rejected PASSED [ 66%]
+tests/test_seed.py::test_seed_creates_admin_demo_user_and_cars PASSED    [ 67%]
+tests/test_seed.py::test_seed_can_run_twice_without_duplicates PASSED    [ 68%]
+tests/test_seed.py::test_app_seeds_itself_when_flag_is_on PASSED         [ 69%]
+tests/test_seed.py::test_seed_script_entry_point PASSED                  [ 70%]
+tests/test_stats.py::test_stats_are_admin_only PASSED                    [ 71%]
+tests/test_stats.py::test_empty_lot_gives_zeros PASSED                   [ 72%]
+tests/test_stats.py::test_stock_numbers PASSED                           [ 73%]
+tests/test_stats.py::test_sales_numbers PASSED                           [ 74%]
+tests/test_stats.py::test_low_stock_uses_threshold_and_lowest_first PASSED [ 75%]
+tests/test_stats.py::test_top_sellers_ranked_by_units PASSED             [ 76%]
+tests/test_stats.py::test_category_breakdown PASSED                      [ 77%]
+tests/test_vehicles.py::test_listing_vehicles_needs_login PASSED         [ 78%]
+tests/test_vehicles.py::test_admin_can_add_vehicle PASSED                [ 79%]
+tests/test_vehicles.py::test_regular_user_cannot_add_vehicle PASSED      [ 80%]
+tests/test_vehicles.py::test_add_vehicle_rejects_invalid_data[bad_field0] PASSED [ 81%]
+tests/test_vehicles.py::test_add_vehicle_rejects_invalid_data[bad_field1] PASSED [ 82%]
+tests/test_vehicles.py::test_add_vehicle_rejects_invalid_data[bad_field2] PASSED [ 83%]
+tests/test_vehicles.py::test_add_vehicle_rejects_invalid_data[bad_field3] PASSED [ 84%]
+tests/test_vehicles.py::test_add_vehicle_rejects_invalid_data[bad_field4] PASSED [ 85%]
+tests/test_vehicles.py::test_add_vehicle_rejects_invalid_data[bad_field5] PASSED [ 86%]
+tests/test_vehicles.py::test_add_vehicle_requires_core_fields PASSED     [ 87%]
+tests/test_vehicles.py::test_list_returns_every_vehicle_including_sold_out PASSED [ 88%]
+tests/test_vehicles.py::test_get_single_vehicle PASSED                   [ 89%]
+tests/test_vehicles.py::test_get_missing_vehicle_is_404 PASSED           [ 90%]
+tests/test_vehicles.py::test_admin_can_update_some_fields PASSED         [ 91%]
+tests/test_vehicles.py::test_update_rejects_invalid_values PASSED        [ 92%]
+tests/test_vehicles.py::test_update_with_empty_body_is_rejected PASSED   [ 93%]
+tests/test_vehicles.py::test_update_missing_vehicle_is_404 PASSED        [ 94%]
+tests/test_vehicles.py::test_regular_user_cannot_update PASSED           [ 95%]
+tests/test_vehicles.py::test_admin_can_delete_vehicle PASSED             [ 96%]
+tests/test_vehicles.py::test_regular_user_cannot_delete PASSED           [ 97%]
+tests/test_vehicles.py::test_delete_missing_vehicle_is_404 PASSED        [ 98%]
+tests/test_vercel_entry.py::test_vercel_entry_exposes_a_working_app PASSED [ 99%]
+tests/test_vercel_entry.py::test_startup_survives_a_seeding_race PASSED  [100%]
+
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.13.17-final-0 _______________
+
+Name                                Stmts   Miss  Cover
+-------------------------------------------------------
+app/__init__.py                         0      0   100%
+app/config.py                          23      0   100%
+app/database.py                        12      0   100%
+app/deps.py                            31      0   100%
+app/errors.py                          21      0   100%
+app/main.py                            36      0   100%
+app/models.py                          46      0   100%
+app/routers/__init__.py                 0      0   100%
+app/routers/auth.py                    21      0   100%
+app/routers/purchases.py               15      0   100%
+app/routers/stats.py                   10      0   100%
+app/routers/vehicles.py                42      0   100%
+app/schemas.py                        117      0   100%
+app/security.py                        34      0   100%
+app/seed.py                            24      0   100%
+app/services/__init__.py                0      0   100%
+app/services/auth_service.py           25      0   100%
+app/services/inventory_service.py      26      0   100%
+app/services/purchase_service.py       13      0   100%
+app/services/stats_service.py          22      0   100%
+app/services/vehicle_service.py        56      0   100%
+-------------------------------------------------------
+TOTAL                                 574      0   100%
+============================= 101 passed in 15.63s =============================

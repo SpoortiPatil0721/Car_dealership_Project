@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-sans: "Barlow", ui-sans-serif, system-ui, sans-serif;
+
+  --color-asphalt: #23262b;
+  --color-asphalt-soft: #33373e;
+  --color-stripe: #f2c230;
+  --color-ink: #1f4fa8;
+  --color-ink-dark: #183e86;
+  --color-signal: #c8372d;
+  --color-paper: #f1f2f4;
+  --color-concrete: #646a74;
+}
+
+@layer base {
+  body {
+    @apply bg-paper font-sans text-asphalt antialiased;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-stripe);
+    outline-offset: 2px;
+  }
+
+  input,
+  select,
+  textarea {
+    @apply rounded-md border border-slate-300 bg-white px-3 py-2 text-asphalt;
+  }
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+@utility btn-primary {
+  @apply btn bg-ink text-white hover:bg-ink-dark;
+}
+
+@utility btn-quiet {
+  @apply btn border border-slate-300 bg-white text-asphalt hover:bg-slate-50;
+}
+
+@utility btn-danger {
+  @apply btn bg-signal text-white hover:brightness-95;
+}
+
+@utility field-label {
+  @apply mb-1 block text-sm font-medium text-concrete;
+}
+
+/* yellow parking bay line down the left edge */
+@utility stall {
+  border-left: 5px solid var(--color-stripe);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
