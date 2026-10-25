@@ -231,6 +231,9 @@ The raw chat is linked in [PROMPTS.md](PROMPTS.md).
 - [Neon – Connect from any app](https://neon.tech/docs/connect/connect-from-any-app)
 - [psycopg 3](https://www.psycopg.org/psycopg3/docs/)
 
+## AI Usage
+
+Every commit that used AI has a `Co-authored-by` trailer for Claude. The raw chat is linked in [PROMPTS.md](PROMPTS.md).
   
 ### Reflection
 
