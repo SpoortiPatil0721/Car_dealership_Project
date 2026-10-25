@@ -219,7 +219,7 @@ The whole app runs on Vercel's free plan. The React build is served as a static 
 - It flagged a race condition in the first version of purchase (read stock, check, write) and changed it to an atomic `UPDATE ... WHERE quantity >= n`.
 - It set up the GitHub Actions test workflow and the Vercel deployment config.
 
-Every commit that used AI has a `Co-authored-by` trailer for Claude. The raw chat is linked in [PROMPTS.md](PROMPTS.md).
+The raw chat is linked in [PROMPTS.md](PROMPTS.md).
 
 ### Reflection
 
